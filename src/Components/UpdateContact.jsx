@@ -7,22 +7,29 @@ import * as Yup from "yup";
 import { editContact } from "../services";
 import { FloatingLabel } from "react-bootstrap";
 
+// Componente para actualizar información del contacto
 export const UpdateContact = ({ contact, handleCancel }) => {
+  // Obtención de datos utilizados del contact para no manipular la información.
+  const id = contact.id;
   const originalContact = {
     ...contact.properties,
   };
 
+  // Creación de formulario con Formik con validación de datos y eventos.
   const { handleSubmit, handleChange, errors, values, touched, handleBlur } =
     useFormik({
+      // Inicializar valores del contacto
       initialValues: {
         firstname: originalContact?.firstname || "",
         lastname: originalContact?.lastname || "",
         email: originalContact?.email || "",
       },
+      // Actualizar datos en evento submit.
       onSubmit: async (data) => {
-        await editContact(contact.id, data);
+        await editContact(id, data);
         handleCancel();
       },
+      // Esquema de validación para cada input.
       validationSchema: Yup.object({
         firstname: Yup.string()
           .required("Este campo es obligatorio")
@@ -40,6 +47,7 @@ export const UpdateContact = ({ contact, handleCancel }) => {
       validateOnBlur: true,
     });
 
+  // Renderizado de inputs con datos del contacto, y actualización en caso de submit, o cancelación de proceso.
   return (
     <Form className="container col-12 mt-4" onSubmit={handleSubmit}>
       <Row className="g-1 justify-content-evenly align-items-center ">

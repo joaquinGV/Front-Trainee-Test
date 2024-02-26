@@ -6,7 +6,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { createContact } from "../services";
 
+// Seccion de formulario para crear nuevo contacto
 export const Formulario = () => {
+  // Formik para manejo, validación de datos y evento submit
   const {
     handleSubmit,
     handleChange,
@@ -22,6 +24,7 @@ export const Formulario = () => {
       email: "",
       phone: "",
     },
+    //Evento submit
     onSubmit: async (data) => {
       await createContact(data);
       resetForm();

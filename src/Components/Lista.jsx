@@ -9,19 +9,25 @@ import { deleteContact, getContacts } from "../services.js";
 import { useState } from "react";
 import Contact from "./Contact.jsx";
 
+// Función lista y logica de renderizado
 export function Lista() {
+
+  // Inicialización vacia de estados de contactos y searchData
   const [contacts, setContacts] = useState([]);
   const [searchData, setSearchData] = useState("");
 
+  // Función que acualiza la lista de contactos en base a un email o vacio para obtener todos.
   async function getList(email = "") {
     const contactsList = await getContacts(email);
     setContacts(contactsList.results);
   }
 
+  // Renderizado inicial para mostrar lista.
   useEffect(() => {
     getList();
   }, []);
 
+  // Manejo eventos Search bar para actualizar estado y actualizar lista en caso de estar vacia.
   const handleInputChange = async (event) => {
     setSearchData(event.target.value);
     if (event.target.value == "") {
@@ -29,10 +35,12 @@ export function Lista() {
     }
   };
 
+  // Manejo de click en Search button.
   const handleSearchClick = async () => {
     await getList(searchData);
   };
 
+  // Manejo de delete para borrar el elemento.
   const handleDelete = async (id) => {
     await deleteContact(id);
     await getList();

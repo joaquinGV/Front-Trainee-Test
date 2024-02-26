@@ -7,22 +7,27 @@ import Col from "react-bootstrap/Col";
 import { useState } from "react";
 import { UpdateContact } from "./UpdateContact";
 
+// Componente de contacto.
 const Contact = ({ contact, handleDelete, getList }) => {
+  // Inicializar estado isEditing como false.
   const [isEditing, setIsEditing] = useState(false);
 
+  // Cambio de estado isEditing a true en click.
   const handleEdit = () => {
     setIsEditing(true);
   };
 
+  // Cambio de estado isEditing a false y actualizar lista de contactos (En caso de edición)
   const handleCancel = () => {
     console.log("Cancel");
     setIsEditing(false);
     getList();
   };
 
+  // Renderización condicional dependiendo el estado isEditing para mostrar componente de edición, o de información del contacto.
   return (
     <>
-      {isEditing ? (
+          {isEditing ? (
         <UpdateContact contact={contact} handleCancel={handleCancel} />
       ) : (
         <>
