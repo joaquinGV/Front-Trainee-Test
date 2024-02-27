@@ -47,7 +47,7 @@ export const Formulario = () => {
         .required("Este campo es obligatorio"),
     }),
     validateOnChange: true,
-    // validateOnBlur: true,
+    validateOnBlur: true,
   });
 
   return (

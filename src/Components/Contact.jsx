@@ -27,14 +27,13 @@ const Contact = ({ contact, handleDelete, getList }) => {
   // Renderización condicional dependiendo el estado isEditing para mostrar componente de edición, o de información del contacto.
   return (
     <>
-          {isEditing ? (
+      {isEditing ? (
         <UpdateContact contact={contact} handleCancel={handleCancel} />
       ) : (
         <>
           <Row className="justify-content-center align-items-center py-1">
             <Col sm={9}>
-              {contact.properties.firstname}{" "}
-              {contact.properties.lastname.split(" ")[0]}
+              {contact.properties.firstname} {contact.properties.lastname}
               {"  |  "}
               {contact.properties.email}
             </Col>

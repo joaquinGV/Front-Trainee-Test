@@ -11,7 +11,6 @@ import Contact from "./Contact.jsx";
 
 // Función lista y logica de renderizado
 export function Lista() {
-
   // Inicialización vacia de estados de contactos y searchData
   const [contacts, setContacts] = useState([]);
   const [searchData, setSearchData] = useState("");
@@ -64,16 +63,17 @@ export function Lista() {
         />
       </InputGroup>
       {/* Map de datos */}
-      {contacts.map((contact) => {
-        return (
-          <Contact
-            key={contact.id}
-            contact={contact}
-            handleDelete={handleDelete}
-            getList={getList}
-          />
-        );
-      })}
+      {contacts &&
+        contacts.map((contact) => {
+          return (
+            <Contact
+              key={contact.id}
+              contact={contact}
+              handleDelete={handleDelete}
+              getList={getList}
+            />
+          );
+        })}
     </Container>
   );
 }
